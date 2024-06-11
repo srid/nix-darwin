@@ -196,6 +196,7 @@ if [ "$action" = switch ] || [ "$action" = build ] || [ "$action" = check ]; the
   if [ -z "$flake" ]; then
     systemConfig="$(nix-build '<darwin>' "${extraBuildFlags[@]}" -A system)"
   else
+    set -x
     systemConfig=$(nix "${flakeFlags[@]}" build --json \
       "${extraBuildFlags[@]}" "${extraLockFlags[@]}" \
       -- "$flake#$flakeAttr.system" \
